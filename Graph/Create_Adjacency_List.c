@@ -6,15 +6,15 @@
 
 typedef struct EdgeNode
 {
-    int adjvex;  // ±ß±í½ÚµãµÄÊı¾İÏî£¬´æ´¢¸Ã±ßËùÒÀ¸½µÄÁíÒ»¸ö¶¥µãµÄÏÂ±ê
-    int weight;  // ¸Ã±ßµÄÈ¨ÖØ
-    struct EdgeNode *next;  // Ö¸ÏòÏÂÒ»¸öÁÚ½Óµã
+    int adjvex;  // è¾¹è¡¨èŠ‚ç‚¹çš„æ•°æ®é¡¹ï¼Œå­˜å‚¨è¯¥è¾¹æ‰€ä¾é™„çš„å¦ä¸€ä¸ªé¡¶ç‚¹çš„ä¸‹æ ‡
+    int weight;  // è¯¥è¾¹çš„æƒé‡
+    struct EdgeNode *next;  // æŒ‡å‘ä¸‹ä¸€ä¸ªé‚»æ¥ç‚¹
 }EdgeNode;
 
 typedef struct VertexNode
 {
     int data;
-    EdgeNode *firstEdge;  // Ö¸ÏòµÚÒ»¸öÁÚ½Óµã
+    EdgeNode *firstEdge;  // æŒ‡å‘ç¬¬ä¸€ä¸ªé‚»æ¥ç‚¹
 }VertexNode, AdjList[MAXVEX];
 
 typedef struct 
@@ -24,36 +24,36 @@ typedef struct
 }AdjListGraph;
 
 
-// ½¨Á¢Í¼µÄÁÚ½Ó±í½á¹¹
+// å»ºç«‹å›¾çš„é‚»æ¥è¡¨ç»“æ„
 void CreateAdjListGraph(AdjListGraph *G)
 {
     int i, j, k;
-    printf("ÊäÈë¶¥µãÊıºÍ±ßÊı£º");
+    printf("è¾“å…¥é¡¶ç‚¹æ•°å’Œè¾¹æ•°ï¼š");
     scanf("%d%d", &G->numVertexes, &G->numEdges);
-    getchar();  // Çå³ıµôÊäÈëµÄ»Ø³µ·û
+    getchar();  // æ¸…é™¤æ‰è¾“å…¥çš„å›è½¦ç¬¦
     
     for (i = 0; i < G->numVertexes; i++)
     {
-        printf("ÊäÈëµÚ%d¸ö¶¥µãµÄÊı¾İ£º", i+1);
-        scanf("%d", &G->adjList[i].data); // ÊäÈë¶¥µãĞÅÏ¢
+        printf("è¾“å…¥ç¬¬%dä¸ªé¡¶ç‚¹çš„æ•°æ®ï¼š", i+1);
+        scanf("%d", &G->adjList[i].data); // è¾“å…¥é¡¶ç‚¹ä¿¡æ¯
         getchar();
-        G->adjList[i].firstEdge = NULL;  // ½«±ß±íÖÃÎª¿Õ±í
+        G->adjList[i].firstEdge = NULL;  // å°†è¾¹è¡¨ç½®ä¸ºç©ºè¡¨
     }
     
     for (k = 0; k < G->numEdges; k++)
     {
-        printf("ÊäÈë±ß<vi, vj>µÄÏÂ±ê£¨Èç£º2 5£©£º");
+        printf("è¾“å…¥è¾¹<vi, vj>çš„ä¸‹æ ‡ï¼ˆå¦‚ï¼š2 5ï¼‰ï¼š");
         scanf("%d%d", &i, &j);
         getchar();
         
         EdgeNode *e; 
         e = (EdgeNode *)malloc(sizeof(EdgeNode));
-        e->adjvex = j;  // ¶¥µãiÖ¸Ïò¶¥µãj
+        e->adjvex = j;  // é¡¶ç‚¹iæŒ‡å‘é¡¶ç‚¹j
         e->next = G->adjList[i].firstEdge;
         G->adjList[i].firstEdge = e;
         
         e = (EdgeNode *)malloc(sizeof(EdgeNode));
-        e->adjvex = i;  // ¶¥µãjÖ¸Ïò¶¥µãi
+        e->adjvex = i;  // é¡¶ç‚¹jæŒ‡å‘é¡¶ç‚¹i
         e->next = G->adjList[j].firstEdge;
         G->adjList[j].firstEdge = e;
         
