@@ -5,34 +5,34 @@
 
 typedef struct
 {
-    int vexs[MAXVEX];  // ¶¥µã±í£¬´æ´¢¶¥µãÔªËØ£¬ÕâÀï¶¥µãÔªËØµÄÊı¾İÀàĞÍÑ¡Ôñint
-    int arc[MAXVEX][MAXVEX];  // ÁÚ½Ó¾ØÕó Êı¾İ´ú±íÈ¨ÖØ
-    int numVertexes, numEdges;  // Í¼ÖĞµ±Ç°µÄ¶¥µãÊıºÍ±ßÊı
+    int vexs[MAXVEX];  // é¡¶ç‚¹è¡¨ï¼Œå­˜å‚¨é¡¶ç‚¹å…ƒç´ ï¼Œè¿™é‡Œé¡¶ç‚¹å…ƒç´ çš„æ•°æ®ç±»å‹é€‰æ‹©int
+    int arc[MAXVEX][MAXVEX];  // é‚»æ¥çŸ©é˜µ æ•°æ®ä»£è¡¨æƒé‡
+    int numVertexes, numEdges;  // å›¾ä¸­å½“å‰çš„é¡¶ç‚¹æ•°å’Œè¾¹æ•°
 }MGraph;
 
-// ½¨Á¢µÄÁÚ½Ó¾ØÕó±íÊ¾
+// å»ºç«‹çš„é‚»æ¥çŸ©é˜µè¡¨ç¤º
 void CreateMGraph(MGraph *G)
 {
     int i, j, k;
-    printf("ÊäÈë¶¥µãÊıºÍ±ßÊı£º");
+    printf("è¾“å…¥é¡¶ç‚¹æ•°å’Œè¾¹æ•°ï¼š");
     scanf("%d%d", &G->numVertexes, &G->numEdges);
-    getchar();  // Çå³ıµôÊäÈëµÄ»Ø³µ·û
+    getchar();  // æ¸…é™¤æ‰è¾“å…¥çš„å›è½¦ç¬¦
     
     
     for (i = 0; i < G->numVertexes; i++)
         for (j = 0; j < G->numVertexes; j++)
-            G->arc[i][j] = INF;               // ³õÊ¼»¯ÁÚ½Ó¾ØÕó
+            G->arc[i][j] = INF;               // åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ
         
     for (i = 0; i < G->numVertexes; i++)
     {
-        printf("ÊäÈëµÚ%d¸ö¶¥µãµÄÊı¾İ£º", i+1);
+        printf("è¾“å…¥ç¬¬%dä¸ªé¡¶ç‚¹çš„æ•°æ®ï¼š", i+1);
         scanf("%d", &G->vexs[i]);
         getchar();
     }
     
     for (k = 0; k < G->numEdges; k++)
     {
-        printf("ÊäÈë±ß<vi, vj>µÄÏÂ±ê£¨Èç£º2 5£©£º");
+        printf("è¾“å…¥è¾¹<vi, vj>çš„ä¸‹æ ‡ï¼ˆå¦‚ï¼š2 5ï¼‰ï¼š");
         scanf("%d%d", &i, &j);
         getchar();
         G->arc[i][j] = 1;
@@ -52,16 +52,16 @@ void PrintMGraphMat(MGraph G)
     }
 }
 
-int visited[MAXVEX];  // ÓÃÓÚ±ê¼ÇÒÑ·ÃÎÊµÄ¶¥µã
+int visited[MAXVEX];  // ç”¨äºæ ‡è®°å·²è®¿é—®çš„é¡¶ç‚¹
 
 void DFS(MGraph G, int i)
 {
-    visited[i] = 1;  // µ½´ï¶¥µãi£¬¶ÔÆä±ê¼ÇÒÑ·ÃÎÊ
+    visited[i] = 1;  // åˆ°è¾¾é¡¶ç‚¹iï¼Œå¯¹å…¶æ ‡è®°å·²è®¿é—®
     
-    printf("%d  ", G.vexs[i]);  // ¶Ô±éÀúµ½µÄ¶¥µãµÄ²Ù×÷£¬ÕâÀï½øĞĞ¼òµ¥µØ´òÓ¡ÊıÖµ²Ù×÷
+    printf("%d  ", G.vexs[i]);  // å¯¹éå†åˆ°çš„é¡¶ç‚¹çš„æ“ä½œï¼Œè¿™é‡Œè¿›è¡Œç®€å•åœ°æ‰“å°æ•°å€¼æ“ä½œ
     
     int j;
-    for (j = 0; j < G.numVertexes; j++)  // ¶Ô¾ØÕóµÄµÚiĞĞËÑË÷£¬Ñ°ÕÒÓë¸Ã¶¥µãÓĞÁªÏµÇÒÃ»ÓĞ·ÃÎÊµÄÏÂÒ»¸ö¶¥µã
+    for (j = 0; j < G.numVertexes; j++)  // å¯¹çŸ©é˜µçš„ç¬¬iè¡Œæœç´¢ï¼Œå¯»æ‰¾ä¸è¯¥é¡¶ç‚¹æœ‰è”ç³»ä¸”æ²¡æœ‰è®¿é—®çš„ä¸‹ä¸€ä¸ªé¡¶ç‚¹
     {
         if (G.arc[i][j] == 1 && visited[j] == 0)
             DFS(G, j);
@@ -70,15 +70,15 @@ void DFS(MGraph G, int i)
 
 void DFSTraverse(MGraph G)
 {
-    // ³õÊ¼»¯visitedÊı×éÔªËØÎª0
+    // åˆå§‹åŒ–visitedæ•°ç»„å…ƒç´ ä¸º0
     for (int i = 0; i < G.numVertexes; i++)
         visited[i] = 0;
     
-    // ´ÓV0¶¥µã¿ªÊ¼±éÀú
+    // ä»V0é¡¶ç‚¹å¼€å§‹éå†
     DFS(G, 0);
     printf("\n");
     
-/* ¸üÒ»°ãµÄĞÎÊ½£º¿¼ÂÇµ½·ÇÁ¬Í¨Í¼£¬ÔòĞèÒª¶ÔÃ¿¸öÁ¬Í¨×ÓÍ¼½øĞĞ±éÀú£¬ÈçÏÂ£º*/
+/* æ›´ä¸€èˆ¬çš„å½¢å¼ï¼šè€ƒè™‘åˆ°éè¿é€šå›¾ï¼Œåˆ™éœ€è¦å¯¹æ¯ä¸ªè¿é€šå­å›¾è¿›è¡Œéå†ï¼Œå¦‚ä¸‹ï¼š*/
 /*
     for (int i = 0; i < G.numVertexes; i++)
     {
@@ -94,11 +94,11 @@ int main()
 {
     MGraph G;
     
-    CreateMGraph(&G);  // ½¨Á¢ÎŞÏòÍ¼µÄÁÚ½Ó¾ØÕó±íÊ¾
+    CreateMGraph(&G);  // å»ºç«‹æ— å‘å›¾çš„é‚»æ¥çŸ©é˜µè¡¨ç¤º
     
-    PrintMGraphMat(G);  // ´òÓ¡ÁÚ½Ó¾ØÕó
+    PrintMGraphMat(G);  // æ‰“å°é‚»æ¥çŸ©é˜µ
     
-    DFSTraverse(G); // ±éÀúËùÓĞ¶¥µã
+    DFSTraverse(G); // éå†æ‰€æœ‰é¡¶ç‚¹
     
     return 0;
 }
