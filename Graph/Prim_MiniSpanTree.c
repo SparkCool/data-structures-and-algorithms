@@ -27,7 +27,6 @@ void PrimMiniSpanTree(MGraph G)
     }
     
     selected[0] = 1;  // 从V0开始，V0加入生成树
-    minDist[0] = FIN;
     
     int i;
     int k = 0;  // 初始化从0开始
