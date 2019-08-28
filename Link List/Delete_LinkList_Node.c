@@ -58,15 +58,31 @@ void DeleteElem(PtrNode *head, int key, int method)
         node->next = q->next;
         free(q);
     }
-    // 方法二：函数调用删除
-    else if (method == 2)    
+
+    // 方法二：传递结构体指针删除
+    if (method == 2)
+    { 
+        Delete_StructPtr(node);  // 与方法一几乎一样，都是使用指向结构体的指针来修改结构体成员的值
+
+    }
+
+    // 方法三：传递成员地址删除
+    else if (method == 3)    
     {
-        Delete(&(node->next));  // 因此传node传递的就是前驱节点4的next的地址，原则：修改谁就传谁的地址
+        Delete_MemberAddr(&(node->next));  // 因此传node传递的就是前驱节点4的next的地址，原则：修改谁就传谁的地址
     }
 }
 
+void Delete_StructPtr(PtrNode node)
+{
+    PtrNode q;
+    q = node->next;
+    printf("Number %d is going to be deleted\n", q->data);
+    node->next = q->next;
+    free(q);
+}
 
-void Delete(PtrNode *p)
+void Delete_MemberAddr(PtrNode *p)
 {
     PtrNode q = NULL;
     q = *p;
