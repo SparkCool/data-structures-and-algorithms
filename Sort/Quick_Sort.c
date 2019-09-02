@@ -38,7 +38,7 @@ void QuickSort(int *arr, int low, int high)
     {
         pivotkey = Partition(arr, low, high);
 
-        QuickSort(arr, low, pivotkey-1);
+        QuickSort(arr, low, pivotkey-1);  // 左右分治
         QuickSort(arr, pivotkey+1, high);
     }
 }
